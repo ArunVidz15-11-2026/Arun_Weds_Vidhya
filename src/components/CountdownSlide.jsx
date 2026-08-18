@@ -19,7 +19,7 @@ export default function CountdownSlide() {
   return (
     <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
       <img
-        src="/couple2.jpg"
+        src={`${import.meta.env.BASE_URL}couple2.jpg`}
         alt="Countdown background"
         loading="eager"
         fetchpriority="high"

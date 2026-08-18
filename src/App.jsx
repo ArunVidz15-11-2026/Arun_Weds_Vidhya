@@ -19,7 +19,7 @@ function App() {
   // Start music once the envelope opens
   useEffect(() => {
     if (inviteOpen && !musicStarted) {
-      audioRef.current = new Audio('/music.mp3')
+      audioRef.current = new Audio(`${import.meta.env.BASE_URL}music.mp3`)
       // Manual loop — with loop=true, the browser restarts at 0 and never fires `ended`,
       // which would defeat our start-offset. Loop ourselves via the `ended` event instead.
       audioRef.current.loop = false

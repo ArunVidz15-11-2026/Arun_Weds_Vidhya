@@ -27,7 +27,7 @@ export default function HeroSlide() {
       {/* PHOTO PANEL — sized on its own, so the caption below never sits on top of the photo/face */}
       <div style={{ position: 'relative', flex: '1 1 auto', minHeight: 0, overflow: 'hidden' }}>
         <motion.img
-          src="/couple.jpg"
+          src={`${import.meta.env.BASE_URL}couple.jpg`}
           alt="Ravichandra and Rachana"
           loading="eager"
           fetchpriority="high"
