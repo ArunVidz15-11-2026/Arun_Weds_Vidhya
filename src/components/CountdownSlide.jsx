@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { fadeUp, stagger } from '../animations'
 import { useCountdown } from '../hooks/useCountdown'
 import Sparkles from './Sparkles'
+import { COUNTDOWN_IMAGE } from '../media'
 
 // Replace with the actual wedding date
 const WEDDING_DATE = '2026-08-30'
@@ -19,7 +20,7 @@ export default function CountdownSlide() {
   return (
     <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
       <img
-        src={`${import.meta.env.BASE_URL}couple2.jpg`}
+        src={COUNTDOWN_IMAGE}
         alt="Countdown background"
         loading="eager"
         fetchpriority="high"
