@@ -1,4 +1,4 @@
-name: Deploy invitation to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -24,19 +24,25 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: 24
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Build groom-side (Ravichandra weds Rachana)
+        run: npm ci && npm run build
 
-      - name: Build
-        run: npm run build
+      - name: Build bride-side (Rachana weds Ravichandra)
+        working-directory: bride
+        run: npm ci && npm run build
+
+      - name: Assemble Pages output
+        run: |
+          mkdir -p pages/bride
+          cp -r dist/. pages/
+          cp -r bride/dist/. pages/bride/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: pages
 
   deploy:
     needs: build
