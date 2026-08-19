@@ -159,31 +159,34 @@ export default function JoinUsSlide({ onJoinCelebration }) {
         </div>
         </motion.div>
 
-        <motion.button
-        variants={fadeUp}
-        onClick={handleJoinCelebrationClick}
-        aria-label="Go to next sections"
-        animate={{ y: [0, -7, 0] }}
-        transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-        whileHover={{ scale: 1.04 }}
-        whileTap={{ scale: 0.97 }}
-        style={{
-          marginTop: 40,
-          letterSpacing: '0.3em',
-          textTransform: 'uppercase',
-          fontSize: 12,
-          color: 'var(--gold)',
-          fontFamily: "'EB Garamond', serif",
-          background: 'linear-gradient(160deg, rgba(26,8,0,0.95), rgba(58,21,5,0.9))',
-          border: '1px solid rgba(201,148,42,0.7)',
-          borderRadius: 999,
-          padding: '10px 18px',
-          cursor: 'pointer',
-          boxShadow: '0 10px 24px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.08)',
-        }}
-      >
-        Join Our Celebration
-        </motion.button>
+        <motion.div
+          animate={{ y: [0, -8, 0] }}
+          transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ marginTop: 40, display: 'inline-block' }}
+        >
+          <motion.button
+            variants={fadeUp}
+            onClick={handleJoinCelebrationClick}
+            aria-label="Go to next sections"
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.97 }}
+            style={{
+              letterSpacing: '0.3em',
+              textTransform: 'uppercase',
+              fontSize: 12,
+              color: 'var(--gold)',
+              fontFamily: "'EB Garamond', serif",
+              background: 'linear-gradient(160deg, rgba(26,8,0,0.95), rgba(58,21,5,0.9))',
+              border: '1px solid rgba(201,148,42,0.7)',
+              borderRadius: 999,
+              padding: '10px 18px',
+              cursor: 'pointer',
+              boxShadow: '0 10px 24px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.08)',
+            }}
+          >
+            Join Our Celebration
+          </motion.button>
+        </motion.div>
       </div>
     </motion.section>
   )
