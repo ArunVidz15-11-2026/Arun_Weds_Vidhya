@@ -1,10 +1,23 @@
 import { motion } from 'framer-motion'
 import { fadeUp, stagger } from '../animations'
 import Divider from './Divider'
+import SectionPopHearts from './SectionPopHearts'
 
 // Introduces the couple with their parents' names, inspired by the
 // "Join us for the wedding" section of the my-beloved template.
-export default function JoinUsSlide() {
+export default function JoinUsSlide({ onJoinCelebration }) {
+  const handleJoinCelebrationClick = () => {
+    if (onJoinCelebration) {
+      onJoinCelebration()
+      return
+    }
+
+    const remainingSection = document.getElementById('remaining-pages-start')
+    if (remainingSection) {
+      remainingSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   return (
     <motion.section
       variants={stagger}
@@ -21,7 +34,10 @@ export default function JoinUsSlide() {
         overflow: 'hidden',
       }}
     >
-      <motion.p
+      <SectionPopHearts />
+
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <motion.p
         variants={fadeUp}
         style={{
           letterSpacing: '0.25em',
@@ -33,9 +49,9 @@ export default function JoinUsSlide() {
         }}
       >
         Join us for the wedding of
-      </motion.p>
+        </motion.p>
 
-      <motion.h2
+        <motion.h2
         variants={fadeUp}
         style={{
           fontFamily: "'Great Vibes', cursive",
@@ -46,9 +62,9 @@ export default function JoinUsSlide() {
         }}
       >
         Ravichandra
-      </motion.h2>
+        </motion.h2>
 
-      <motion.p
+        <motion.p
         variants={fadeUp}
         style={{
           fontFamily: "'Cormorant Garamond', serif",
@@ -59,9 +75,9 @@ export default function JoinUsSlide() {
         }}
       >
         &amp;
-      </motion.p>
+        </motion.p>
 
-      <motion.h2
+        <motion.h2
         variants={fadeUp}
         style={{
           fontFamily: "'Great Vibes', cursive",
@@ -72,11 +88,11 @@ export default function JoinUsSlide() {
         }}
       >
         Rachana
-      </motion.h2>
+        </motion.h2>
 
-      <Divider />
+        <Divider />
 
-      <motion.div
+        <motion.div
         variants={fadeUp}
         style={{
           display: 'flex',
@@ -141,10 +157,14 @@ export default function JoinUsSlide() {
             &amp; Mrs. Padma
           </p>
         </div>
-      </motion.div>
+        </motion.div>
 
-      <motion.p
+        <motion.button
         variants={fadeUp}
+        onClick={handleJoinCelebrationClick}
+        aria-label="Go to next sections"
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.97 }}
         style={{
           marginTop: 40,
           letterSpacing: '0.3em',
@@ -152,10 +172,17 @@ export default function JoinUsSlide() {
           fontSize: 12,
           color: 'var(--gold)',
           fontFamily: "'EB Garamond', serif",
+          background: 'linear-gradient(160deg, rgba(26,8,0,0.95), rgba(58,21,5,0.9))',
+          border: '1px solid rgba(201,148,42,0.7)',
+          borderRadius: 999,
+          padding: '10px 18px',
+          cursor: 'pointer',
+          boxShadow: '0 10px 24px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.08)',
         }}
       >
         Join Our Celebration
-      </motion.p>
+        </motion.button>
+      </div>
     </motion.section>
   )
 }

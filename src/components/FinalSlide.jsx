@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../animations'
 import Divider from './Divider'
+import SectionPopHearts from './SectionPopHearts'
 
 export default function FinalSlide() {
   return (
@@ -17,18 +18,23 @@ export default function FinalSlide() {
         justifyContent: 'center',
         textAlign: 'center',
         padding: '48px 24px',
+        position: 'relative',
+        overflow: 'hidden',
         background: 'linear-gradient(180deg, var(--cream), #f2e8d8)',
       }}
     >
-      <motion.div
+      <SectionPopHearts opacity={0.78} />
+
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <motion.div
         animate={{ scale: [1, 1.15, 1] }}
         transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
         style={{ fontSize: 26 }}
       >
         💛
-      </motion.div>
+        </motion.div>
 
-      <h2
+        <h2
         style={{
           fontFamily: "'Great Vibes', cursive",
           fontSize: 42,
@@ -40,11 +46,11 @@ export default function FinalSlide() {
         }}
       >
         Ravichandra &amp; Rachana
-      </h2>
+        </h2>
 
-      <Divider />
+        <Divider />
 
-      <p
+        <p
         style={{
           marginTop: 14,
           fontFamily: "'EB Garamond', serif",
@@ -54,8 +60,8 @@ export default function FinalSlide() {
         }}
       >
         With love and gratitude, we look forward to celebrating with you.
-      </p>
-      <p
+        </p>
+        <p
         style={{
           marginTop: 40,
           fontSize: 11,
@@ -66,7 +72,8 @@ export default function FinalSlide() {
         }}
       >
         #RavichandraWedsRachana
-      </p>
+        </p>
+      </div>
     </motion.section>
   )
 }

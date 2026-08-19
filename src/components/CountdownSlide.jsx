@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { fadeUp, stagger } from '../animations'
 import { useCountdown } from '../hooks/useCountdown'
 import Sparkles from './Sparkles'
+import SectionPopHearts from './SectionPopHearts'
 import { COUNTDOWN_IMAGE } from '../media'
 
 // Replace with the actual wedding date
@@ -9,6 +10,14 @@ const WEDDING_DATE = '2026-08-30'
 
 export default function CountdownSlide() {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE)
+
+  const handleScrollDown = (e) => {
+    const section = e.currentTarget.closest('section')
+    const nextSection = section?.nextElementSibling
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   const units = [
     { label: 'Days', value: days },
@@ -18,7 +27,7 @@ export default function CountdownSlide() {
   ]
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+    <section id="remaining-pages-start" style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
       <img
         src={COUNTDOWN_IMAGE}
         alt="Countdown background"
@@ -34,6 +43,8 @@ export default function CountdownSlide() {
         }}
       />
       <div style={{ position: 'absolute', inset: 0, background: 'rgba(15,8,2,0.45)' }} />
+
+      <SectionPopHearts opacity={0.82} />
 
       <Sparkles />
 
@@ -113,6 +124,49 @@ export default function CountdownSlide() {
             </motion.div>
           ))}
         </motion.div>
+
+        <motion.button
+          variants={fadeUp}
+          onClick={handleScrollDown}
+          aria-label="Scroll to next page"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          style={{
+            marginTop: 22,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '8px 14px',
+            borderRadius: 999,
+            border: '1px solid rgba(201,148,42,0.7)',
+            background: 'linear-gradient(160deg, rgba(26,8,0,0.92), rgba(58,21,5,0.86))',
+            color: 'var(--gold)',
+            letterSpacing: '0.09em',
+            textTransform: 'uppercase',
+            fontSize: 10,
+            fontFamily: "'EB Garamond', serif",
+            cursor: 'pointer',
+            boxShadow: '0 10px 24px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.08)',
+          }}
+        >
+          Scroll Down
+          <motion.svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="var(--gold)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </motion.svg>
+        </motion.button>
       </motion.div>
     </section>
   )

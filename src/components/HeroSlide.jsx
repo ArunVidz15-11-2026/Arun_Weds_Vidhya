@@ -1,7 +1,7 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { useRef } from 'react'
 import { fadeUp, scaleIn } from '../animations'
-import Sparkles from './Sparkles'
+import { HeartsBackLayer, HeartsFrontLayer } from './HeartsPopout'
 import { HERO_IMAGE } from '../media'
 
 const goldShimmer = {
@@ -22,11 +22,64 @@ export default function HeroSlide() {
   // simple parallax touch so the hero doesn't feel like a static poster.
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.18])
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '12%'])
+  // The foreground hearts fade out as the hero scrolls away, so they never
+  // linger awkwardly over the sections below.
+  const heartsFade = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.5, 0])
+  // The "scroll down" hint fades out as soon as the user starts scrolling.
+  const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
+
+  const handleScrollDown = () => {
+    const nextSection = ref.current?.nextElementSibling
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  // Pointer-driven parallax — moving the mouse (or finger) shifts each heart
+  // layer at a different rate, which is what sells the sense of depth/3D.
+  const pointerX = useSpring(useMotionValue(0), { stiffness: 60, damping: 14 })
+  const pointerY = useSpring(useMotionValue(0), { stiffness: 60, damping: 14 })
+
+  const handlePointerMove = (e) => {
+    const rect = ref.current?.getBoundingClientRect()
+    if (!rect) return
+    const px = (e.clientX - rect.left) / rect.width
+    const py = (e.clientY - rect.top) / rect.height
+    pointerX.set(px * 2 - 1)
+    pointerY.set(py * 2 - 1)
+  }
+
+  const handlePointerLeave = () => {
+    pointerX.set(0)
+    pointerY.set(0)
+  }
 
   return (
-    <section ref={ref} style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* PHOTO PANEL — sized on its own, so the caption below never sits on top of the photo/face */}
-      <div style={{ position: 'relative', flex: '1 1 auto', minHeight: 0, overflow: 'hidden' }}>
+    <section
+      ref={ref}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      style={{
+        position: 'relative',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        perspective: 1000,
+      }}
+    >
+      {/* PHOTO PANEL — the "display" the hearts appear to float out of */}
+      <div
+        style={{
+          position: 'relative',
+          flex: '1 1 auto',
+          minHeight: 0,
+          overflow: 'hidden',
+          margin: '14px 14px 0',
+          borderRadius: 18,
+          border: '1px solid rgba(201,148,42,0.55)',
+          boxShadow: '0 20px 50px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.08)',
+        }}
+      >
         <motion.img
           src={HERO_IMAGE}
           alt="Ravichandra and Rachana"
@@ -68,14 +121,15 @@ export default function HeroSlide() {
           }}
         />
 
-        <Sparkles />
+        {/* Distant + half-emerged hearts — behind the names, in front of the photo */}
+        <HeartsBackLayer pointerX={pointerX} pointerY={pointerY} style={{ zIndex: 2 }} />
 
         {/* TOP — monogram + subtitle */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          style={{ position: 'relative', zIndex: 2, padding: '36px 24px 0', textAlign: 'center' }}
+          style={{ position: 'relative', zIndex: 3, padding: '36px 24px 0', textAlign: 'center' }}
         >
           <div
             style={{
@@ -120,8 +174,10 @@ export default function HeroSlide() {
         animate="visible"
         style={{
           position: 'relative',
+          zIndex: 4,
           flexShrink: 0,
-          background: 'linear-gradient(160deg, #1a0800, #3a1505)',
+          background:
+            'radial-gradient(circle at 50% 0%, rgba(255,127,166,0.16), transparent 60%), linear-gradient(160deg, #1a0800, #3a1505)',
           padding: '22px 24px 30px',
           textAlign: 'center',
         }}
@@ -161,7 +217,55 @@ export default function HeroSlide() {
         >
           Request the honour of your presence
         </p>
+
+        <motion.button
+          onClick={handleScrollDown}
+          aria-label="Scroll down"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          style={{
+            marginTop: 14,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '8px 14px',
+            borderRadius: 999,
+            border: '1px solid rgba(201,148,42,0.7)',
+            background: 'rgba(20,10,4,0.6)',
+            color: 'var(--gold)',
+            fontFamily: "'EB Garamond', serif",
+            letterSpacing: '0.09em',
+            textTransform: 'uppercase',
+            fontSize: 10,
+            cursor: 'pointer',
+            opacity: scrollHintOpacity,
+            position: 'relative',
+            zIndex: 6,
+          }}
+        >
+          Scroll Down
+          <motion.svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="var(--gold)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </motion.svg>
+        </motion.button>
       </motion.div>
+
+      {/* FRONT HEARTS — float above everything, breaking past the frame's edges */}
+      <HeartsFrontLayer pointerX={pointerX} pointerY={pointerY} fadeOpacity={heartsFade} style={{ zIndex: 50 }} />
     </section>
   )
 }
+

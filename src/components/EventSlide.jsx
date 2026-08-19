@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { fadeUp } from '../animations'
 import Divider from './Divider'
+import SectionPopHearts from './SectionPopHearts'
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -33,6 +34,14 @@ export default function EventSlide({
 }) {
   const { day, month, weekday } = parseDateParts(date)
 
+  const handleScrollDown = (e) => {
+    const section = e.currentTarget.closest('section')
+    const nextSection = section?.nextElementSibling
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
   return (
     <motion.section
       variants={fadeUp}
@@ -63,9 +72,13 @@ export default function EventSlide({
         }}
       />
 
-      <div style={{ position: 'relative', fontSize: 22, marginBottom: 6 }}>{icon}</div>
+      <SectionPopHearts opacity={0.82} />
 
-      <p
+      <div style={{ position: 'relative', zIndex: 2 }}>
+
+        <div style={{ position: 'relative', fontSize: 22, marginBottom: 6 }}>{icon}</div>
+
+        <p
         style={{
           letterSpacing: '0.25em',
           textTransform: 'uppercase',
@@ -75,15 +88,15 @@ export default function EventSlide({
         }}
       >
         {label}
-      </p>
+        </p>
 
-      <h2 style={{ fontFamily: "'Great Vibes', cursive", fontSize: 44, color: headingColor, margin: '10px 0 16px' }}>
+        <h2 style={{ fontFamily: "'Great Vibes', cursive", fontSize: 44, color: headingColor, margin: '10px 0 16px' }}>
         {heading}
-      </h2>
+        </h2>
 
-      <Divider color={headingColor} />
+        <Divider color={headingColor} />
 
-      <p
+        <p
         style={{
           fontFamily: "'Cormorant Garamond', serif",
           fontSize: 17,
@@ -94,10 +107,10 @@ export default function EventSlide({
         }}
       >
         {description}
-      </p>
+        </p>
 
       {/* Stylised date card — month / weekday / big day number / time */}
-      <div
+        <div
         style={{
           display: 'inline-block',
           background: 'rgba(253,248,240,0.6)',
@@ -107,7 +120,7 @@ export default function EventSlide({
           marginBottom: 22,
         }}
       >
-        <p
+          <p
           style={{
             margin: 0,
             fontFamily: "'EB Garamond', serif",
@@ -117,8 +130,8 @@ export default function EventSlide({
           }}
         >
           {month}
-        </p>
-        <p
+          </p>
+          <p
           style={{
             margin: '2px 0 4px',
             fontFamily: "'EB Garamond', serif",
@@ -128,8 +141,8 @@ export default function EventSlide({
           }}
         >
           {weekday}
-        </p>
-        <div
+          </p>
+          <div
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 600,
@@ -139,8 +152,8 @@ export default function EventSlide({
           }}
         >
           {day}
-        </div>
-        <p
+          </div>
+          <p
           style={{
             margin: '6px 0 0',
             fontFamily: "'EB Garamond', serif",
@@ -151,10 +164,10 @@ export default function EventSlide({
           }}
         >
           {time}
-        </p>
-      </div>
+          </p>
+        </div>
 
-      <div
+        <div
         style={{
           display: 'inline-flex',
           flexDirection: 'column',
@@ -164,57 +177,100 @@ export default function EventSlide({
           color: 'var(--text-dark)',
         }}
       >
-        <span>{venue}</span>
-        {dressCode && (
-          <span style={{ fontStyle: 'italic', color: 'var(--text-medium)' }}>Dress Code: {dressCode}</span>
-        )}
-      </div>
-
-      {(mapsUrl || contactPhone) && (
-        <div style={{ marginTop: 20, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {mapsUrl && (
-            <motion.a
-              href={mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.05, backgroundColor: headingColor, color: '#fdf8f0' }}
-              whileTap={{ scale: 0.96 }}
-              style={{
-                display: 'inline-block',
-                padding: '10px 22px',
-                borderRadius: 999,
-                border: `1px solid ${headingColor}`,
-                color: headingColor,
-                textDecoration: 'none',
-                fontSize: 13,
-                letterSpacing: '0.05em',
-              }}
-            >
-              View on Map
-            </motion.a>
-          )}
-          {contactPhone && (
-            <motion.a
-              href={`tel:${contactPhone}`}
-              whileHover={{ scale: 1.05, backgroundColor: headingColor, color: '#fdf8f0' }}
-              whileTap={{ scale: 0.96 }}
-              style={{
-                display: 'inline-block',
-                padding: '10px 22px',
-                borderRadius: 999,
-                border: `1px solid ${headingColor}`,
-                background: headingColor,
-                color: '#fdf8f0',
-                textDecoration: 'none',
-                fontSize: 13,
-                letterSpacing: '0.05em',
-              }}
-            >
-              Contact Us
-            </motion.a>
+          <span>{venue}</span>
+          {dressCode && (
+            <span style={{ fontStyle: 'italic', color: 'var(--text-medium)' }}>Dress Code: {dressCode}</span>
           )}
         </div>
-      )}
+
+        {(mapsUrl || contactPhone) && (
+          <div style={{ marginTop: 20, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            {mapsUrl && (
+              <motion.a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05, backgroundColor: headingColor, color: '#fdf8f0' }}
+                whileTap={{ scale: 0.96 }}
+                style={{
+                  display: 'inline-block',
+                  padding: '10px 22px',
+                  borderRadius: 999,
+                  border: `1px solid ${headingColor}`,
+                  color: headingColor,
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  letterSpacing: '0.05em',
+                }}
+              >
+                View on Map
+              </motion.a>
+            )}
+            {contactPhone && (
+              <motion.a
+                href={`tel:${contactPhone}`}
+                whileHover={{ scale: 1.05, backgroundColor: headingColor, color: '#fdf8f0' }}
+                whileTap={{ scale: 0.96 }}
+                style={{
+                  display: 'inline-block',
+                  padding: '10px 22px',
+                  borderRadius: 999,
+                  border: `1px solid ${headingColor}`,
+                  background: headingColor,
+                  color: '#fdf8f0',
+                  textDecoration: 'none',
+                  fontSize: 13,
+                  letterSpacing: '0.05em',
+                }}
+              >
+                Contact Us
+              </motion.a>
+            )}
+          </div>
+        )}
+
+        <motion.button
+          onClick={handleScrollDown}
+          aria-label="Scroll to next page"
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          style={{
+            marginTop: 22,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '8px 14px',
+            borderRadius: 999,
+            border: `1px solid ${headingColor}`,
+            background: 'linear-gradient(160deg, rgba(26,8,0,0.92), rgba(58,21,5,0.86))',
+            color: 'var(--gold)',
+            letterSpacing: '0.09em',
+            textTransform: 'uppercase',
+            fontSize: 10,
+            fontFamily: "'EB Garamond', serif",
+            cursor: 'pointer',
+            boxShadow: '0 10px 24px rgba(0,0,0,0.18), inset 0 0 0 1px rgba(255,255,255,0.08)',
+          }}
+        >
+          Scroll Down
+          <motion.svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="var(--gold)"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </motion.svg>
+        </motion.button>
+      </div>
     </motion.section>
   )
 }

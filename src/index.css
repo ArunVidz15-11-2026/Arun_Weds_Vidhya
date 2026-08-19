@@ -3,10 +3,18 @@
 #root {
   max-width: 430px; /* iPhone 14 Pro Max width — the invite is always a single mobile-width card */
   margin: 0 auto;
-  overflow-x: hidden;
+  overflow-x: hidden; /* mobile default: the card IS the viewport, no room to overflow */
   position: relative;
   z-index: 1;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.25); /* gives the card an edge on wide desktop screens */
+}
+
+/* On desktop/tablet widths, let the pop-out hearts break past the card's
+   edge into the surrounding dark backdrop instead of clipping them. */
+@media (min-width: 431px) {
+  #root {
+    overflow-x: visible;
+  }
 }
 
 :root {
@@ -26,6 +34,7 @@ body {
   padding: 0;
   color: var(--text-dark);
   font-family: 'EB Garamond', serif;
+  overflow-x: hidden; /* safety net: hearts breaking out of #root never cause page scrollbars */
 }
 
 /* On desktop/tablet widths, frame the invite card in an elegant dark

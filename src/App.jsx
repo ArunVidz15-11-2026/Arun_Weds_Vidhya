@@ -13,6 +13,7 @@ function App() {
   const audioRef = useRef(null)
   const [isMuted, setIsMuted] = useState(false)
   const [musicStarted, setMusicStarted] = useState(false)
+  const [remainingUnlocked, setRemainingUnlocked] = useState(false)
 
   const { scrollYProgress } = useScroll()
   const scaleY = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
@@ -50,6 +51,15 @@ function App() {
       audioRef.current.muted = !isMuted
       setIsMuted(!isMuted)
     }
+  }
+
+  const handleUnlockRemainingPages = () => {
+    setRemainingUnlocked(true)
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.getElementById('remaining-pages-start')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
+    })
   }
 
   if (!inviteOpen) {
@@ -99,37 +109,42 @@ function App() {
       </button>
 
       <HeroSlide />
-      <JoinUsSlide />
-      <CountdownSlide />
+      <JoinUsSlide onJoinCelebration={handleUnlockRemainingPages} />
 
-      <EventSlide
-        icon="🌼"
-        label="A GLOW BEFORE THE VOWS"
-        heading="Haldi Ceremony"
-        headingColor="#7a4e00"
-        description="A joyful morning of turmeric, laughter and blessings."
-        date="28 August 2026"
-        time="10:00 AM onwards"
-        venue="Chirala"
-        dressCode="Yellow Traditional"
-        mapsUrl="https://maps.app.goo.gl/jsj1uMhVY4Q2waiaA"
-        contactPhone="8328132741"
-      />
+      {remainingUnlocked && (
+        <>
+          <CountdownSlide />
 
-      <EventSlide
-        icon="💍"
-        label="THE BIG DAY"
-        heading="The Wedding"
-        headingColor="#5a3200"
-        description="Join us as we begin our forever, Ravichandra & Rachana."
-        date="30 August 2026"
-        time="6:00 PM onwards"
-        venue="Chirala"
-        mapsUrl="https://maps.app.goo.gl/PcFHfXcuj5Af8TAWA"
-        contactPhone="8328132741"
-      />
+          <EventSlide
+            icon="🌼"
+            label="A GLOW BEFORE THE VOWS"
+            heading="Haldi Ceremony"
+            headingColor="#7a4e00"
+            description="A joyful morning of turmeric, laughter and blessings."
+            date="28 August 2026"
+            time="10:00 AM onwards"
+            venue="Chirala"
+            dressCode="Yellow Traditional"
+            mapsUrl="https://maps.app.goo.gl/jsj1uMhVY4Q2waiaA"
+            contactPhone="8328132741"
+          />
 
-      <FinalSlide />
+          <EventSlide
+            icon="💍"
+            label="THE BIG DAY"
+            heading="The Wedding"
+            headingColor="#5a3200"
+            description="Join us as we begin our forever, Ravichandra & Rachana."
+            date="30 August 2026"
+            time="6:00 PM onwards"
+            venue="Chirala"
+            mapsUrl="https://maps.app.goo.gl/PcFHfXcuj5Af8TAWA"
+            contactPhone="8328132741"
+          />
+
+          <FinalSlide />
+        </>
+      )}
     </>
   )
 }
