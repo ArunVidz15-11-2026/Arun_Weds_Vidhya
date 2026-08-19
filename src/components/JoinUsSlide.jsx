@@ -163,6 +163,8 @@ export default function JoinUsSlide({ onJoinCelebration }) {
         variants={fadeUp}
         onClick={handleJoinCelebrationClick}
         aria-label="Go to next sections"
+        animate={{ y: [0, -7, 0] }}
+        transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
         whileHover={{ scale: 1.04 }}
         whileTap={{ scale: 0.97 }}
         style={{
