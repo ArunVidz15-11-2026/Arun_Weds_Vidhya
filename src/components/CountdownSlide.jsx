@@ -40,9 +40,10 @@ export default function CountdownSlide() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          filter: 'saturate(1.1) contrast(1.04)',
         }}
       />
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(15,8,2,0.45)' }} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(15,8,2,0.30)' }} />
 
       <SectionPopHearts opacity={0.82} />
 

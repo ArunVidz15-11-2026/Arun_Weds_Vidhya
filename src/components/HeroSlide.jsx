@@ -61,7 +61,7 @@ export default function HeroSlide() {
       onPointerLeave={handlePointerLeave}
       style={{
         position: 'relative',
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         perspective: 1000,
@@ -71,9 +71,10 @@ export default function HeroSlide() {
       <div
         style={{
           position: 'relative',
-          flex: '1 1 auto',
+          flex: '0 0 clamp(460px, 76vh, 820px)',
           minHeight: 0,
           overflow: 'hidden',
+          background: '#120804',
           margin: '14px 14px 0',
           borderRadius: 18,
           border: '1px solid rgba(201,148,42,0.55)',
@@ -91,7 +92,7 @@ export default function HeroSlide() {
             inset: 0,
             width: '100%',
             height: '100%',
-            objectFit: 'cover',
+            objectFit: 'contain',
             objectPosition: 'center top',
             scale,
             y,
@@ -167,34 +168,39 @@ export default function HeroSlide() {
         </motion.div>
       </div>
 
-      {/* CAPTION PANEL — its own solid background, always below the photo, never over a face */}
+      {/* CAPTION PANEL — lighter and more compact so the photo remains visible */}
       <motion.div
         variants={scaleIn}
         initial="hidden"
         animate="visible"
         style={{
           position: 'relative',
+          margin: '0 14px 14px',
           zIndex: 4,
-          flexShrink: 0,
           background:
-            'radial-gradient(circle at 50% 0%, rgba(255,127,166,0.16), transparent 60%), linear-gradient(160deg, #1a0800, #3a1505)',
-          padding: '22px 24px 30px',
+            'radial-gradient(circle at 50% 0%, rgba(255,127,166,0.08), transparent 70%), linear-gradient(160deg, rgba(26,8,0,0.18), rgba(58,21,5,0.12))',
+          backdropFilter: 'blur(1.5px)',
+          border: '1px solid rgba(255,255,255,0.16)',
+          borderRadius: 20,
+          boxShadow: '0 10px 35px rgba(0,0,0,0.2)',
+          padding: '12px 16px 14px',
           textAlign: 'center',
         }}
       >
         <motion.h1
           animate={{ backgroundPositionX: ['0%', '200%'] }}
           transition={{ duration: 3.5, repeat: Infinity, ease: 'linear' }}
-          style={{ fontFamily: "'Great Vibes', cursive", fontSize: 46, margin: 0, ...goldShimmer }}
+          style={{ fontFamily: "'Great Vibes', cursive", fontSize: 38, margin: 0, ...goldShimmer }}
         >
           Rachana
         </motion.h1>
         <p
           style={{
             color: 'var(--gold)',
-            margin: '4px 0',
+            margin: '2px 0',
             fontFamily: "'Cormorant Garamond', serif",
             fontStyle: 'italic',
+            fontSize: 14,
           }}
         >
           weds
@@ -202,15 +208,15 @@ export default function HeroSlide() {
         <motion.h1
           animate={{ backgroundPositionX: ['0%', '200%'] }}
           transition={{ duration: 3.5, repeat: Infinity, ease: 'linear', delay: 0.3 }}
-          style={{ fontFamily: "'Great Vibes', cursive", fontSize: 46, margin: 0, ...goldShimmer }}
+          style={{ fontFamily: "'Great Vibes', cursive", fontSize: 38, margin: 0, ...goldShimmer }}
         >
           Ravichandra
         </motion.h1>
         <p
           style={{
-            marginTop: 10,
+            marginTop: 6,
             color: '#fdf8f0',
-            fontSize: 13,
+            fontSize: 12,
             letterSpacing: '0.15em',
             fontFamily: "'EB Garamond', serif",
           }}
