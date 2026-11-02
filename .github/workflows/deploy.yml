@@ -43,11 +43,11 @@ jobs:
 
       - name: Assemble Pages output
         run: |
-          mkdir -p pages/bride pages/no-haldi/bride
+          mkdir -p pages/bride pages/Sunday/bride
           cp -r dist/. pages/
           cp -r bride/dist/. pages/bride/
-          cp -r no-haldi/dist/. pages/no-haldi/
-          cp -r no-haldi/bride/dist/. pages/no-haldi/bride/
+          cp -r no-haldi/dist/. pages/Sunday/
+          cp -r no-haldi/bride/dist/. pages/Sunday/bride/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
