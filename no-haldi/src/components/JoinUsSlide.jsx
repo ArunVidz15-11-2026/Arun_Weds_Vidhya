@@ -126,7 +126,7 @@ export default function JoinUsSlide({ onJoinCelebration }) {
           >
             Mr. T. Ramamoorthy
             <br />
-            &amp; Mrs. R. Sundari
+            &amp; Mrs. S. Sundari
           </p>
         </div>
 
