@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, publish/arunvel-vidhya]
   workflow_dispatch:
 
 permissions:
@@ -26,18 +26,28 @@ jobs:
         with:
           node-version: 24
 
-      - name: Build groom-side (Ravichandra weds Rachana)
+      - name: Build main invitation
         run: npm ci && npm run build
 
-      - name: Build bride-side (Rachana weds Ravichandra)
+      - name: Build main bride variant
         working-directory: bride
+        run: npm ci && npm run build
+
+      - name: Build no-Haldi invitation
+        working-directory: no-haldi
+        run: npm ci && npm run build
+
+      - name: Build no-Haldi bride variant
+        working-directory: no-haldi/bride
         run: npm ci && npm run build
 
       - name: Assemble Pages output
         run: |
-          mkdir -p pages/bride
+          mkdir -p pages/bride pages/no-haldi/bride
           cp -r dist/. pages/
           cp -r bride/dist/. pages/bride/
+          cp -r no-haldi/dist/. pages/no-haldi/
+          cp -r no-haldi/bride/dist/. pages/no-haldi/bride/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

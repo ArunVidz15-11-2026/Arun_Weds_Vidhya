@@ -121,25 +121,37 @@ function App() {
             heading="Haldi Ceremony"
             headingColor="#7a4e00"
             description="A joyful morning of turmeric, laughter and blessings."
-            date="28 August 2026"
-            time="10:00 AM onwards"
-            venue="Chirala"
-            dressCode="Yellow Traditional"
-            mapsUrl="https://maps.app.goo.gl/jsj1uMhVY4Q2waiaA"
-            contactPhone="8328132741"
+            date="14 November 2026"
+            time="9:30 AM onwards"
+            venue="Sri Vistara Party Lawn and Convention Centre, Coimbatore"
+            mapsUrl="https://maps.app.goo.gl/cGvd3ivLdJiPRVvf7"
+            contactPhone="9994638469"
+          />
+
+          <EventSlide
+            icon="🥂"
+            label="AN EVENING OF CELEBRATION"
+            heading="Wedding Reception"
+            headingColor="#7a4e00"
+            description="Join us for an evening of celebration with family and friends."
+            date="14 November 2026"
+            time="6:00 PM onwards"
+            venue="Sri Vistara Party Lawn and Convention Centre, Coimbatore"
+            mapsUrl="https://maps.app.goo.gl/cGvd3ivLdJiPRVvf7"
+            contactPhone="9994638469"
           />
 
           <EventSlide
             icon="💍"
-            label="THE BIG DAY"
+            label="THE WEDDING"
             heading="The Wedding"
             headingColor="#5a3200"
-            description="Join us as we begin our forever, Ravichandra & Rachana."
-            date="30 August 2026"
-            time="6:00 PM onwards"
-            venue="Chirala"
-            mapsUrl="https://maps.app.goo.gl/PcFHfXcuj5Af8TAWA"
-            contactPhone="8328132741"
+            description="Join us as we begin our forever, Arunvel & Vidhya."
+            date="15 November 2026"
+            time="7:45 AM to 8:45 AM"
+            venue="Sri Vistara Party Lawn and Convention Centre, Coimbatore"
+            mapsUrl="https://maps.app.goo.gl/cGvd3ivLdJiPRVvf7"
+            contactPhone="9994638469"
           />
 
           <FinalSlide />

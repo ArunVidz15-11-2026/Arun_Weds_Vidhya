@@ -61,7 +61,7 @@ export default function JoinUsSlide({ onJoinCelebration }) {
           margin: '18px 0 4px',
         }}
       >
-        Ravichandra
+        Arunvel
         </motion.h2>
 
         <motion.p
@@ -87,7 +87,7 @@ export default function JoinUsSlide({ onJoinCelebration }) {
           margin: '4px 0 24px',
         }}
       >
-        Rachana
+        Vidhya
         </motion.h2>
 
         <Divider />
@@ -124,9 +124,9 @@ export default function JoinUsSlide({ onJoinCelebration }) {
               lineHeight: 1.4,
             }}
           >
-            Mr. Raghavarao Gottipati
+            Mr. T. Ramamoorthy
             <br />
-            &amp; Mrs. Vazzram <span style={{ fontStyle: 'italic', color: 'var(--text-medium)', fontSize: 15 }}>(Late)</span>
+            &amp; Mrs. R. Sundari
           </p>
         </div>
 
@@ -152,9 +152,9 @@ export default function JoinUsSlide({ onJoinCelebration }) {
               lineHeight: 1.4,
             }}
           >
-            Mr. Meruga Prabhakar
+            Mr. V. Jeyasankar
             <br />
-            &amp; Mrs. Padma
+            &amp; Mrs. J. Anitha
           </p>
         </div>
         </motion.div>

@@ -6,7 +6,7 @@ import SectionPopHearts from './SectionPopHearts'
 import { COUNTDOWN_IMAGE } from '../media'
 
 // Replace with the actual wedding date
-const WEDDING_DATE = '2026-08-30'
+const WEDDING_DATE = '2026-11-15'
 
 export default function CountdownSlide() {
   const { days, hours, minutes, seconds } = useCountdown(WEDDING_DATE)
@@ -83,7 +83,7 @@ export default function CountdownSlide() {
           variants={fadeUp}
           style={{ fontFamily: "'Great Vibes', cursive", fontSize: 40, color: '#fdf8f0', margin: '8px 0 28px' }}
         >
-          30 August 2026
+          15 November 2026
         </motion.h2>
 
         <motion.div variants={fadeUp} style={{ display: 'flex', gap: 14 }}>

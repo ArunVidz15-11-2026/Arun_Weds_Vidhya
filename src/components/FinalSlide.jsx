@@ -45,7 +45,7 @@ export default function FinalSlide() {
           margin: '8px 0 0',
         }}
       >
-        Ravichandra &amp; Rachana
+        Arunvel &amp; Vidhya
         </h2>
 
         <Divider />
@@ -71,7 +71,7 @@ export default function FinalSlide() {
           opacity: 0.7,
         }}
       >
-        #RavichandraWedsRachana
+        #ArunvelWedsVidhya
         </p>
       </div>
     </motion.section>

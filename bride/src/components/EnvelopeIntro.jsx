@@ -146,7 +146,7 @@ export default function EnvelopeIntro({ onComplete }) {
               letterSpacing: '0.03em',
             }}
           >
-            R&amp;R
+            A&amp;V
           </span>
         </motion.div>
       </motion.div>

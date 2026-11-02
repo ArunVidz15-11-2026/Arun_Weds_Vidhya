@@ -83,7 +83,7 @@ export default function HeroSlide() {
       >
         <motion.img
           src={HERO_IMAGE}
-          alt="Ravichandra and Rachana"
+          alt="Arunvel and Vidhya"
           loading="eager"
           fetchpriority="high"
           decoding="async"
@@ -150,7 +150,7 @@ export default function HeroSlide() {
               textShadow: '0 1px 6px rgba(0,0,0,0.5)',
             }}
           >
-            R&amp;R
+            A&amp;V
           </div>
           <p
             style={{
@@ -192,7 +192,7 @@ export default function HeroSlide() {
           transition={{ duration: 3.5, repeat: Infinity, ease: 'linear' }}
           style={{ fontFamily: "'Great Vibes', cursive", fontSize: 38, margin: 0, ...goldShimmer }}
         >
-          Rachana
+          Arunvel
         </motion.h1>
         <p
           style={{
@@ -210,7 +210,7 @@ export default function HeroSlide() {
           transition={{ duration: 3.5, repeat: Infinity, ease: 'linear', delay: 0.3 }}
           style={{ fontFamily: "'Great Vibes', cursive", fontSize: 38, margin: 0, ...goldShimmer }}
         >
-          Ravichandra
+          Vidhya
         </motion.h1>
         <p
           style={{
