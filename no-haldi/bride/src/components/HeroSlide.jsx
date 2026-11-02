@@ -206,17 +206,50 @@ export default function HeroSlide() {
         >
           Vidhya
         </motion.h1>
-        <p
+        <motion.p
+          variants={fadeUp}
           style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 6,
             marginTop: 10,
-            color: '#fdf8f0',
+            color: '#f21d45',
             fontSize: 13,
             letterSpacing: '0.15em',
             fontFamily: "'EB Garamond', serif",
           }}
         >
-          Request the honour of your presence
-        </p>
+          <motion.span
+            aria-hidden="true"
+            animate={{ opacity: [0.55, 1, 0.65], scale: [0.9, 1.12, 0.9] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ color: '#ff3158', textShadow: '0 0 8px rgba(255,49,88,0.8)' }}
+          >
+            ♥
+          </motion.span>
+          <motion.span
+            animate={{ backgroundPositionX: ['0%', '200%'] }}
+            transition={{ duration: 2.6, repeat: Infinity, ease: 'linear' }}
+            style={{
+              backgroundImage: 'linear-gradient(100deg, #a50025, #ff3158, #fff2f4, #ff3158, #a50025)',
+              backgroundSize: '220% auto',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Request the honour of your presence
+          </motion.span>
+          <motion.span
+            aria-hidden="true"
+            animate={{ opacity: [0.65, 1, 0.55], scale: [1.08, 0.9, 1.08] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+            style={{ color: '#ff3158', textShadow: '0 0 8px rgba(255,49,88,0.8)' }}
+          >
+            ♥
+          </motion.span>
+        </motion.p>
 
         <motion.button
           onClick={handleScrollDown}

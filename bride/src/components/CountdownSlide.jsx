@@ -59,9 +59,9 @@ export default function CountdownSlide() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           minHeight: '100vh',
-          padding: '48px 24px',
+          padding: '32px 24px 48px',
           textAlign: 'center',
         }}
       >
